@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import "../oldStyle/old_html/DevicePage.css"
 import "../oldStyle/old_html/basket.css"
 import {Context} from "../index";
@@ -13,6 +13,7 @@ import {useHistory} from 'react-router-dom'
 
 import  logo from "../oldStyle/img/logo.svg"
 import  cart from "../oldStyle/img/cart.png"
+import {getBasket} from "../http/deviceAPI";
 const NavBar = observer(() => {
     const {user} = useContext(Context)
     const history = useHistory()
@@ -22,18 +23,38 @@ const NavBar = observer(() => {
         user.setIsAuth(false)
     }
 
+    const {device} = useContext(Context)
+
+    useEffect(() => {
+        getBasket().then(data => device.setBaskets(data))
+    }, [])
+
+    const count = () => device.basket.length;
+
+
     return (
         <Navbar className="log">
             <Container className="main-nav-b  d-flex justify-content-around bd-highlight mb-2">
                 <NavLink className="brand" to={SHOP_ROUTE}><img src={logo} alt="brand" /></NavLink>
                 {user.isAuth ?
                     <Nav className="main-nav-b " >
+                        {user.isAdmin ?
+                            <Button
+                                className="main-nav-d"
+                                variant={"outline-light"}
+                                onClick={() => history.push(ADMIN_ROUTE)}
+                            >
+                                Админ панель
+                            </Button>
+                            :
+                            <div></div>
+                        }
                         <Button
                             className="main-nav-d"
                             variant={"outline-light"}
-                            onClick={() => history.push(ADMIN_ROUTE)}
+                            onClick={() => history.push(SHOP_ROUTE)}
                         >
-                            Админ панель
+                            Главная
                         </Button>
                         <Button
                             className="main-nav-d"
@@ -47,7 +68,7 @@ const NavBar = observer(() => {
                             onClick={() => history.push(BASKET_ROUTE)}
                             >
                             <img className="cart__image" src={cart} alt="Cart" />
-                            <div className="cart__num" id="cart_num">0</div>
+                            <div className="cart__num" id="cart_num">{count()}</div>
                         </Button>
                     </Nav>
                     :

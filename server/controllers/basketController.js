@@ -16,7 +16,7 @@ class BasketController {
 
     async delFromBasket(req,res,next){
         const user = req.user
-        const {deviceId} = req.body
+        const {deviceId} = Number(req.body)
         console.log(user.id)
         console.log("hello")
         console.log(deviceId)

@@ -21,7 +21,6 @@ const Basket = observer(() => {
     const del = (device) => {
         const formData = new FormData()
         formData.append('deviceId', device.id)
-        console.log(formData["deviceId"])
         console.log(device.id)
         console.log(device.name)
         delFromBasket(formData).then(response => alert(`Товар ` + device.name + ` был удален из корзины!`))
@@ -32,9 +31,10 @@ const Basket = observer(() => {
             className="d-flex flex-sm-column justify-content-center align-items-center mt-3"
         >
             <h1 className="pb-2">Корзина</h1>
-        <CardGroup className="d-flex flex-row">
+        <CardGroup className="d-flex flex-wrap mt-3" md={9}>
             {device.basket.map(product =>
-                <Card style={{ width: '18rem' }}>
+                <Col md={4} className={"mt-3"} >
+                <Card style={{ width: '18rem' }} >
                     <Card.Img style={{ height: '15rem' }} variant="top"  src={process.env.REACT_APP_API_URL + product.device.img} alt={process.env.REACT_APP_API_URL + product.device.img}/>
                     <Card.Body>
                         <Card.Title>{product.device.name}</Card.Title>
@@ -44,6 +44,7 @@ const Basket = observer(() => {
                         <Button variant="primary" style={{ backgroundImage: 'linear-gradient(315deg,#0cbaba 0,#380036 74%)' }} onClick={()=>del(product.device)}>Удалить из корзины</Button>
                     </Card.Body>
                 </Card>
+                    </Col>
 
             )}
         </CardGroup>

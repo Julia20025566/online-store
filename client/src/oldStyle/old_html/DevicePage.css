@@ -108,7 +108,7 @@
     flex: 0 0 ;
     font-weight: 400;
     font-size: 25px;
-    padding-left: 10px;
+    margin-right: 20px;
     color: #bfbfbf;
 }
 
@@ -191,11 +191,11 @@ body {
     justify-content: space-between;
     font-weight: bold;
     cursor: default;
-    padding-right: 280px;
+    padding-right: 0px;
 }
 
 .main-nav-d {
-    margin-left: 200px;
+    margin-left: 80px;
     justify-content: center;
     align-items: center;
     color: white;

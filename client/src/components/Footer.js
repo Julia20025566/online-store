@@ -11,6 +11,7 @@ import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-k
 const Footer = observer(() => {
     const {user} = useContext(Context)
     const {device} = useContext(Context)
+
     const history = useHistory()
 
     const logOut = () => {
@@ -54,26 +55,18 @@ const Footer = observer(() => {
 
                         <MDBCol md='3' lg='2' xl='2' className='mx-auto mb-4'>
                             <h6 className='text-uppercase fw-bold mb-4'>Категории</h6>
-                            <p>
-                                <a href='#!' className='text-reset'>
-                                    Pricing
-                                </a>
-                            </p>
-                            <p>
-                                <a href='#!' className='text-reset'>
-                                    Settings
-                                </a>
-                            </p>
-                            <p>
-                                <a href='#!' className='text-reset'>
-                                    Orders
-                                </a>
-                            </p>
-                            <p>
-                                <a href='#!' className='text-reset'>
-                                    Help
-                                </a>
-                            </p>
+                            {device.types.map(type =>
+                                <p>
+
+                                    <a href='#!' className='text-reset' style={{cursor: 'pointer'}}
+                                       active={type.id === device.selectedType.id}
+                                       onClick={() => device.setSelectedType(type)}
+                                       key={type.id}>
+                                        {type.name}
+                                    </a>
+                                </p>
+                            )}
+
                         </MDBCol>
 
                         <MDBCol md='4' lg='3' xl='3' className='mx-auto mb-md-0 mb-4'>
