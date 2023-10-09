@@ -1,16 +1,29 @@
-const {Basket} = require('../models/models')
-const ApiError = require('../error/ApiError');
+const { Device, BasketDevice, Basket } = require("../models/models")
 
 class BasketController {
-    async create(req, res) {
-        const userId = req.body.userId
-        const type = await Basket.create({userId})
-        return res.json(type)
+    // ------ CRUD корзины ------ //
+
+    async addToBasket(req,res,next){
+        const user = req.user
+        const {deviceId} = req.body
+        const basket = await BasketDevice.create({basketId : user.id, deviceId : deviceId})
+        return res.json(basket)
     }
-    async delete(req, res) {
-        const userId = Number(req.body.userId)
-        await Basket.destroy({where: {userId: userId}})
-        return res.json({userId})
+
+    async delFromBasket(req,res,next){
+        const user = req.user
+        const {deviceId} = req.body
+        const basket = await BasketDevice.destroy({where:{ basketId : user.id, deviceId : deviceId}})
+        return res.json(basket)
+    }
+
+    async getBasketUser(req,res){
+        const {id} = req.user
+        const basket = await BasketDevice.findAll({include: {
+                model: Device
+            }, where: {basketId: id}})
+
+        return res.json(basket)
     }
 
 }
