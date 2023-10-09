@@ -5,7 +5,7 @@ import {Context} from "../index";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import {NavLink} from "react-router-dom";
-import {ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE} from "../utils/consts";
+import {ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE, BASKET_ROUTE} from "../utils/consts";
 import {Button} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
 import Container from "react-bootstrap/Container";
@@ -27,7 +27,7 @@ const NavBar = observer(() => {
             <Container className="main-nav-b  d-flex justify-content-around bd-highlight mb-2">
                 <NavLink className="brand" to={SHOP_ROUTE}><img src={logo} alt="brand" /></NavLink>
                 {user.isAuth ?
-                    <Nav className="main-nav-c " >
+                    <Nav className="main-nav-b " >
                         <Button
                             className="main-nav-d"
                             variant={"outline-light"}
@@ -42,6 +42,13 @@ const NavBar = observer(() => {
                         >
                             Выйти
                         </Button>
+                        <Button className="cart" id="cart"
+                                variant={"outline-light"}
+                            onClick={() => history.push(BASKET_ROUTE)}
+                            >
+                            <img className="cart__image" src={cart} alt="Cart" />
+                            <div className="cart__num" id="cart_num">0</div>
+                        </Button>
                     </Nav>
                     :
                     <Nav className="main-nav-b">
@@ -53,10 +60,7 @@ const NavBar = observer(() => {
                         </Button>
                     </Nav>
                 }
-                <button className="cart" id="cart">
-                    <img className="cart__image" src={cart} alt="Cart" />
-                    <div className="cart__num" id="cart_num">0</div>
-                </button>
+
             </Container>
         </Navbar>
 

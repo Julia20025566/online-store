@@ -1,8 +1,6 @@
 .cart {
-    width: 75px;
-    height: 75px;
     border-radius: 50%;
-    background-color: #364364;
+    background-color: rebeccapurple;
     z-index: 100;
     transition: 0.1s;
     cursor: pointer;
