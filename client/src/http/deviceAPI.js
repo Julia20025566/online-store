@@ -37,18 +37,6 @@ export const fetchOneDevice = async (id) => {
     return data
 }
 
-export const createBasketDevice = async (deviceId, basketId) => {
-    const {data} = await $authHost.post('api/basketDevice', deviceId, basketId)
-    return data
-}
-
-export const fetchBasketDevices = async (basketId) => {
-    const {data} = await $host.get('api/basketDevice', {params: {
-            basketId
-        }})
-    return data
-}
-
 export const addToBasket = async (deviceId) => {
     const {response} = await $authHost.post('api/basket', deviceId)
     return response
@@ -60,6 +48,8 @@ export const getBasket = async () => {
 }
 
 export const delFromBasket = async (deviceId) => {
+    console.log(deviceId)
     const {response} = await $authHost.delete('api/basket', deviceId)
+    console.log(response)
     return response
 }

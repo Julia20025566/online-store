@@ -15,6 +15,8 @@ const DevicePage = () => {
     const add = () => {
         const formData = new FormData()
         formData.append('deviceId', device.id)
+        console.log(formData.deviceId)
+        console.log("HI")
         addToBasket(formData).then(response => alert(`Товар ` + device.name + ` был добавлен в вашу корзину!`))
     }
 

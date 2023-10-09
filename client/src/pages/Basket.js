@@ -21,7 +21,9 @@ const Basket = observer(() => {
     const del = (device) => {
         const formData = new FormData()
         formData.append('deviceId', device.id)
+        console.log(formData["deviceId"])
         console.log(device.id)
+        console.log(device.name)
         delFromBasket(formData).then(response => alert(`Товар ` + device.name + ` был удален из корзины!`))
     }
 

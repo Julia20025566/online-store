@@ -1,4 +1,5 @@
 const { Device, BasketDevice, Basket } = require("../models/models")
+const {logger} = require("sequelize/lib/utils/logger");
 
 class BasketController {
     // ------ CRUD корзины ------ //
@@ -6,6 +7,9 @@ class BasketController {
     async addToBasket(req,res,next){
         const user = req.user
         const {deviceId} = req.body
+        console.log(user.id)
+        console.log("hello")
+        console.log(deviceId)
         const basket = await BasketDevice.create({basketId : user.id, deviceId : deviceId})
         return res.json(basket)
     }
@@ -13,6 +17,9 @@ class BasketController {
     async delFromBasket(req,res,next){
         const user = req.user
         const {deviceId} = req.body
+        console.log(user.id)
+        console.log("hello")
+        console.log(deviceId)
         const basket = await BasketDevice.destroy({where:{ basketId : user.id, deviceId : deviceId}})
         return res.json(basket)
     }
