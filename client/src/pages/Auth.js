@@ -27,6 +27,9 @@ const Auth = observer(() => {
             }
             user.setUser(user)
             user.setIsAuth(true)
+            if (email === "j3@ya.ru"){
+                user.setIsAdmin(true)
+            }
             history.push(SHOP_ROUTE)
         } catch (e) {
             alert(e.response.data.message)

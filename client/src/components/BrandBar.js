@@ -15,9 +15,7 @@ const BrandBar = observer(() => {
 
     return (
         <Dropdown>
-            <Dropdown.Toggle id="dropdown-basic"  className="brand_bar">
-                Brand
-            </Dropdown.Toggle>
+            <Dropdown.Toggle>{device.selectedBrand.name || "Выберите бренд"}</Dropdown.Toggle>
 
             <Dropdown.Menu>
                 {device.brands.map(brand =>
@@ -30,6 +28,14 @@ const BrandBar = observer(() => {
                     {brand.name}
                 </Dropdown.Item>
                     )}
+                <Dropdown.Item
+                               className="p-1"
+
+                               onClick={() => device.setSelectedBrand(0)}
+                               border={0 === device.selectedBrand.id ? 'danger' : 'light'}
+                >
+                    Все устройства
+                </Dropdown.Item>
             </Dropdown.Menu>
 
         </Dropdown>

@@ -21,6 +21,7 @@ const NavBar = observer(() => {
     const logOut = () => {
         user.setUser({})
         user.setIsAuth(false)
+        user.setIsAdmin(false)
     }
 
     const {device} = useContext(Context)
@@ -68,7 +69,6 @@ const NavBar = observer(() => {
                             onClick={() => history.push(BASKET_ROUTE)}
                             >
                             <img className="cart__image" src={cart} alt="Cart" />
-                            <div className="cart__num" id="cart_num">{count()}</div>
                         </Button>
                     </Nav>
                     :

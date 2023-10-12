@@ -9,7 +9,7 @@ const authMiddleware = require('../middleware/authMiddleware')
 // ------- CRUD корзины ------- //
 router.get('/', authMiddleware , basketController.getBasketUser)
 router.post('/', authMiddleware , basketController.addToBasket)
-router.delete('/', authMiddleware , basketController.delFromBasket)
+router.delete('/:deviceId', authMiddleware , basketController.delFromBasket)
 
 
 

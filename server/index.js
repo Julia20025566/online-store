@@ -7,8 +7,7 @@ const fileUpload = require('express-fileupload')
 const router = require('./routes/index')
 const errorHandler = require('./middleware/ErrorHandlingMiddleware')
 const path = require('path')
-
-const PORT = process.env.PORT || 8082
+const PORT = process.env.PORT || 8080
 
 const app = express()
 app.use(cors())
@@ -19,6 +18,12 @@ app.use('/api', router)
 
 // Обработка ошибок, последний Middleware
 app.use(errorHandler)
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 const start = async () => {
     try {
@@ -29,6 +34,5 @@ const start = async () => {
         console.log(e)
     }
 }
-
 
 start()

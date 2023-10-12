@@ -5,11 +5,11 @@ import {addToBasket, delFromBasket, getBasket} from '../http/deviceAPI';
 
 import {Button, Card, CardGroup, Col, Container, Row} from 'react-bootstrap'
 import { observer } from 'mobx-react-lite';
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 
 const Basket = observer(() => {
     const {device} = useContext(Context)
-
+    const history = useHistory()
     useEffect(() => {
         getBasket().then(data => device.setBaskets(data))
     }, [])
@@ -21,9 +21,8 @@ const Basket = observer(() => {
     const del = (device) => {
         const formData = new FormData()
         formData.append('deviceId', device.id)
-        console.log(device.id)
-        console.log(device.name)
-        delFromBasket(formData).then(response => alert(`Товар ` + device.name + ` был удален из корзины!`))
+        delFromBasket(device.id).then(response => alert(`Товар ` + device.name + ` был удален из корзины!`))
+
     }
 
     return (
